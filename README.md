@@ -2,6 +2,7 @@
 
 [![WordPress](https://img.shields.io/badge/WordPress-5.8%2B-blue.svg?logo=wordpress)](https://wordpress.org)
 [![Chart.js](https://img.shields.io/badge/Chart.js-3.6.1-FF6384.svg?logo=chartdotjs)](https://www.chartjs.org)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=flat&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/luiz-ferreira-260277379/)
 [![License: GPL v2+](https://img.shields.io/badge/License-GPL%20v2%2B-green.svg)](https://www.gnu.org/licenses/gpl-2.0.html)
 
 Plugin WordPress moderno que adiciona um Custom Block no **Gutenberg** chamado **Gráfico Pizza** (`cms-adm/build-grafics`), permitindo criar, personalizar e exibir múltiplos gráficos de pizza interativos e responsivos alimentados pelo **Chart.js**.
@@ -86,7 +87,15 @@ luiz0067-grafic/
 
 ---
 
-## 📄 Licença e Autoria
+## 📄 Licença
 
-- **Autor**: Luiz Fernando Brogliatto Ferreira
-- **Licença**: [GPL-2.0-or-later](https://www.gnu.org/licenses/gpl-2.0.html)
+Este projeto é software livre e está licenciado sob os termos da licença [GNU General Public License v2.0 or later (GPL-2.0-or-later)](https://www.gnu.org/licenses/gpl-2.0.html).
+
+---
+
+## 👨‍💻 Autor
+
+**Luiz Fernando Brogliatto Ferreira**
+- WordPress.org: [@luiz0067](https://profiles.wordpress.org/luiz0067/)
+- GitHub: [@luiz0067yahoo](https://github.com/luiz0067yahoo)
+- LinkedIn: [Luiz Fernando Brogliatto Ferreira](https://www.linkedin.com/in/luiz-ferreira-260277379/)
