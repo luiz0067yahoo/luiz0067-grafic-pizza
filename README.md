@@ -30,6 +30,10 @@ Plugin WordPress moderno que adiciona um Custom Block no **Gutenberg** chamado *
 - **Frontend Leve e Totalmente Responsivo**:
   - Integração local com Chart.js v3.6.1 (sem necessidade de conexões externas ou CDNs).
   - Ajuste de alturas dinâmico para alinhamento uniforme em qualquer resolução.
+- **Internacionalização Completa (i18n)**:
+  - Suporte nativo e pronto para múltiplos idiomas através de `load_plugin_textdomain` e `wp_set_script_translations`.
+  - Pacotes de idiomas completos (.pot, .po, .mo e JSON Jed para o Gutenberg).
+  - Suporte completo ao **Português (`pt_BR`)**, **Inglês (`en_US`)**, **Espanhol (`es_ES`)** e **Italiano (`it_IT`)**.
 
 ---
 
@@ -37,18 +41,35 @@ Plugin WordPress moderno que adiciona um Custom Block no **Gutenberg** chamado *
 
 ```text
 luiz0067-grafic/
-├── build-grafics.php       # Arquivo principal do plugin (headers WP, register_block_type, enqueue)
+├── build-grafics.php       # Arquivo principal do plugin (headers WP, register_block_type, i18n, enqueue)
 ├── screenshot.png          # Captura oficial de tela para exibição no WordPress / GitHub
+├── languages/              # Arquivos de internacionalização e tradução
+│   ├── luiz0067-build-grafics.pot      # Template mestre de tradução
+│   ├── luiz0067-build-grafics-pt_BR.*  # Tradução para Português do Brasil (PO, MO, JSON)
+│   ├── luiz0067-build-grafics-en_US.*  # Tradução para Inglês (PO, MO, JSON)
+│   ├── luiz0067-build-grafics-es_ES.*  # Tradução para Espanhol (PO, MO, JSON)
+│   └── luiz0067-build-grafics-it_IT.*  # Tradução para Italiano (PO, MO, JSON)
 ├── assets/
 │   ├── js/
 │   │   ├── chart.min.js    # Biblioteca Chart.js v3.6.1 empacotada localmente
-│   │   ├── block.js        # Lógica do bloco Gutenberg (edit, save, atributos)
+│   │   ├── block.js        # Lógica do bloco Gutenberg (edit, save, atributos, i18n)
 │   │   └── frontend.js     # Inicialização dos gráficos no frontend público
 │   └── css/
 │       ├── editor.css      # Estilos do painel de edição do Gutenberg
 │       └── style.css       # Estilos públicos (círculos de porcentagem, layout responsivo)
 └── README.md               # Documentação do projeto
 ```
+
+---
+
+## 🌐 Idiomas Suportados
+
+| Idioma | Código Locale | Status |
+| :--- | :--- | :--- |
+| 🇧🇷 **Português do Brasil** | `pt_BR` | Nativo / 100% |
+| 🇺🇸 **Inglês** | `en_US` | Completo / 100% |
+| 🇪🇸 **Espanhol** | `es_ES` | Completo / 100% |
+| 🇮🇹 **Italiano** | `it_IT` | Completo / 100% |
 
 ---
 
