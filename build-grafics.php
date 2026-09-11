@@ -11,6 +11,7 @@
  * License:           GPL-2.0-or-later
  * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
  * Text Domain:       luiz0067-build-grafics
+ * Domain Path:       /languages
  *
  * @package           Luiz0067_Build_Grafics
  */
@@ -24,6 +25,18 @@ if ( ! defined( 'ABSPATH' ) ) {
 define( 'LUIZ0067_BUILD_GRAFICS_VERSION', '1.0.0' );
 define( 'LUIZ0067_BUILD_GRAFICS_URL', plugin_dir_url( __FILE__ ) );
 define( 'LUIZ0067_BUILD_GRAFICS_PATH', plugin_dir_path( __FILE__ ) );
+
+/**
+ * Load plugin textdomain for translations
+ */
+function luiz0067_build_grafics_load_textdomain() {
+	load_plugin_textdomain(
+		'luiz0067-build-grafics',
+		false,
+		dirname( plugin_basename( __FILE__ ) ) . '/languages'
+	);
+}
+add_action( 'init', 'luiz0067_build_grafics_load_textdomain' );
 
 /**
  * Register Gutenberg block, scripts and styles
@@ -46,6 +59,13 @@ function luiz0067_build_grafics_register_block() {
 		array( 'wp-blocks', 'wp-element', 'wp-editor', 'wp-components', 'wp-i18n', 'jquery', 'luiz0067-chartjs' ),
 		LUIZ0067_BUILD_GRAFICS_VERSION,
 		true
+	);
+
+	// Script translations for Gutenberg block
+	wp_set_script_translations(
+		'luiz0067-build-grafics-block',
+		'luiz0067-build-grafics',
+		LUIZ0067_BUILD_GRAFICS_PATH . 'languages'
 	);
 
 	// 3. Frontend Script (Chart.js canvas initialization on public pages)

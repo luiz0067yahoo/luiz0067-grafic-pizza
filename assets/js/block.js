@@ -9,6 +9,12 @@
 	var el = wp.element.createElement;
 	var useEffect = wp.element.useEffect;
 	var useState = wp.element.useState;
+	var __ = (wp.i18n && wp.i18n.__) ? wp.i18n.__ : function (text) { return text; };
+	var sprintf = (wp.i18n && wp.i18n.sprintf) ? wp.i18n.sprintf : function (format) {
+		var args = Array.prototype.slice.call(arguments, 1);
+		var i = 0;
+		return format.replace(/%[sd]/g, function () { return args[i++]; });
+	};
 	var buildGraficsChartInstances = {};
 
 	// Paleta padrão de 75 cores hexadecimais (Originais / Claras / Escuras)
@@ -35,14 +41,14 @@
 	];
 
 	wp.blocks.registerBlockType('cms-adm/build-grafics', {
-		title: 'Gráfico pizza',
+		title: __('Gráfico pizza', 'luiz0067-build-grafics'),
 		icon: 'chart-pie',
-		description: 'Gere seu gráfico de pizza em uma tabela com cores personalizadas',
+		description: __('Gere seu gráfico de pizza em uma tabela com cores personalizadas', 'luiz0067-build-grafics'),
 		example: {
 			attributes: {
-				title: ['Exemplo Gráfico'],
-				subTitle: ['Subtítulo Exemplo'],
-				legend: [['Vendas', 'Serviços', 'Outros']],
+				title: [__('Exemplo Gráfico', 'luiz0067-build-grafics')],
+				subTitle: [__('Subtítulo Exemplo', 'luiz0067-build-grafics')],
+				legend: [[__('Vendas', 'luiz0067-build-grafics'), __('Serviços', 'luiz0067-build-grafics'), __('Outros', 'luiz0067-build-grafics')]],
 				dataValue: [['70', '20', '10']],
 				colorItem: [['#f08f86', '#57a7ed', '#35cd76']],
 				mainBlockId: ['build-grafics-preview']
@@ -109,7 +115,7 @@
 
 			if (needsInit) {
 				setAttributes(newAttrs);
-				return el('div', { className: 'all-grafics-element loading-grafics' }, 'Carregando gráfico...');
+				return el('div', { className: 'all-grafics-element loading-grafics' }, __('Carregando gráfico...', 'luiz0067-build-grafics'));
 			}
 
 			// Renderiza ou atualiza os gráficos Chart.js ao montar ou mudar atributos
@@ -212,7 +218,7 @@
 				var accData = dataValue.map(function (arr) { return [...arr]; });
 
 				var nextColor = defaultColorHexLegend[accLegend[posContainer].length % defaultColorHexLegend.length];
-				accLegend[posContainer].splice(posItem + 1, 0, 'Nova legenda');
+				accLegend[posContainer].splice(posItem + 1, 0, __('Nova legenda', 'luiz0067-build-grafics'));
 				accColor[posContainer].splice(posItem + 1, 0, nextColor);
 				accData[posContainer].splice(posItem + 1, 0, '10');
 
@@ -376,7 +382,7 @@
 											onChange: function (e) {
 												handleUpdateColor(posContainer, itemPos, e.target.value);
 											},
-											title: 'Escolha uma cor'
+											title: __('Escolha uma cor', 'luiz0067-build-grafics')
 										}),
 										el('div', {
 											className: 'divColor',
@@ -390,7 +396,7 @@
 										el('input', {
 											type: 'text',
 											className: 'w-100',
-											placeholder: 'Coloque o título aqui',
+											placeholder: __('Coloque o título aqui', 'luiz0067-build-grafics'),
 											value: currentLegends[itemPos] || '',
 											onChange: function (e) {
 												handleUpdateLegend(posContainer, itemPos, e.target.value);
@@ -401,7 +407,7 @@
 										el('input', {
 											type: 'number',
 											className: 'w-100',
-											placeholder: 'Valor',
+											placeholder: __('Valor', 'luiz0067-build-grafics'),
 											value: currentDataValues[itemPos] || '',
 											onChange: function (e) {
 												handleUpdateDataValue(posContainer, itemPos, e.target.value);
@@ -412,7 +418,7 @@
 										el('button', {
 											type: 'button',
 											className: 'btn-action-row btn-remove-row',
-											'aria-label': 'Remover Linha',
+											'aria-label': __('Remover Linha', 'luiz0067-build-grafics'),
 											onClick: function () {
 												handleRemoveRow(posContainer, itemPos);
 											}
@@ -420,7 +426,7 @@
 										el('button', {
 											type: 'button',
 											className: 'btn-action-row btn-add-row',
-											'aria-label': 'Adicionar Linha',
+											'aria-label': __('Adicionar Linha', 'luiz0067-build-grafics'),
 											onClick: function () {
 												handleAddRow(posContainer, itemPos);
 											}
@@ -454,10 +460,12 @@
 							},
 								el('caption', { className: 'w-100 bg-0', style: { captionSide: 'top' } },
 									el('div', { className: 'edit-table-header d-flex justify-content-between align-items-center mb-2' },
-										el('strong', null, 'Editar Gráfico #' + (posContainer + 1)),
+										el('strong', null, sprintf(__('Editar Gráfico #%d', 'luiz0067-build-grafics'), posContainer + 1)),
 										el('button', {
 											type: 'button',
 											className: 'btn-close-table',
+											'aria-label': __('Fechar tabela', 'luiz0067-build-grafics'),
+											title: __('Fechar tabela', 'luiz0067-build-grafics'),
 											onClick: function () {
 												toggleEditTable(posContainer);
 											}
@@ -467,7 +475,7 @@
 										el('input', {
 											type: 'text',
 											className: 'w-100',
-											placeholder: 'Coloque o título do gráfico aqui...',
+											placeholder: __('Coloque o título do gráfico aqui...', 'luiz0067-build-grafics'),
 											value: title[posContainer] || '',
 											onChange: function (e) {
 												handleUpdateTitle(posContainer, e.target.value);
@@ -478,7 +486,7 @@
 										el('input', {
 											type: 'text',
 											className: 'w-100 bg-0',
-											placeholder: 'Coloque o subtítulo do gráfico aqui...',
+											placeholder: __('Coloque o subtítulo do gráfico aqui...', 'luiz0067-build-grafics'),
 											value: subTitle[posContainer] || '',
 											onChange: function (e) {
 												handleUpdateSubTitle(posContainer, e.target.value);
@@ -488,10 +496,10 @@
 								),
 								el('thead', null,
 									el('tr', null,
-										el('td', null, 'Cor'),
-										el('td', { className: 'description' }, 'Legenda'),
-										el('td', { className: 'btn-exibir' }, 'Valor'),
-										el('td', null, 'Ações')
+										el('td', null, __('Cor', 'luiz0067-build-grafics')),
+										el('td', { className: 'description' }, __('Legenda', 'luiz0067-build-grafics')),
+										el('td', { className: 'btn-exibir' }, __('Valor', 'luiz0067-build-grafics')),
+										el('td', null, __('Ações', 'luiz0067-build-grafics'))
 									)
 								),
 								el('tbody', null, linesEditor)
@@ -503,7 +511,7 @@
 									el('button', {
 										type: 'button',
 										className: 'btn-grafic-action btn-danger',
-										title: 'Remover gráfico',
+										title: __('Remover gráfico', 'luiz0067-build-grafics'),
 										onClick: function () {
 											handleRemoveContainer(posContainer);
 										}
@@ -511,7 +519,7 @@
 									el('button', {
 										type: 'button',
 										className: 'btn-grafic-action btn-primary',
-										title: 'Editar dados do gráfico',
+										title: __('Editar dados do gráfico', 'luiz0067-build-grafics'),
 										onClick: function () {
 											toggleEditTable(posContainer);
 										}
@@ -519,7 +527,7 @@
 									el('button', {
 										type: 'button',
 										className: 'btn-grafic-action btn-dark',
-										title: 'Adicionar novo gráfico',
+										title: __('Adicionar novo gráfico', 'luiz0067-build-grafics'),
 										onClick: function () {
 											handleAddContainer(posContainer);
 										}
